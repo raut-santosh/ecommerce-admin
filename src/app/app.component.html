@@ -1,0 +1,15 @@
+<div *ngIf="isOnline">
+    <app-header *ngIf="helperService.showhideheadsidefoot"></app-header>
+<app-sidebar *ngIf="helperService.showhideheadsidefoot"></app-sidebar>
+<router-outlet ></router-outlet>
+
+<app-footer *ngIf="helperService.showhideheadsidefoot"></app-footer>
+
+
+</div>
+<div *ngIf="!isOnline" class="offline-message">
+    <link href="http://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <i class="material-icons">wifi_off</i>
+    <div id="headingone">Your Connection was Offline.</div>
+    Please check your Wifi Connection.
+</div>
