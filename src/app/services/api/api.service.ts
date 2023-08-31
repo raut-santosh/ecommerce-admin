@@ -11,8 +11,11 @@ export class ApiService {
   apiUrl: string = environment.apiUrl;
 
   APIS: any = {
-    BLOG_LIST: { endpoint: 'blog/list', method: 'get' },
-    BLOG_ADDEDIT: { endpoint: 'blog/addedit', method: 'post' },
+    PRODUCTS_LIST: { endpoint: 'products/list', method: 'get' },
+    PRODUCTS_ADDEDIT: { endpoint: 'products/addedit', method: 'post' },
+    ORDERS_LIST: { endpoint: 'products/list', method: 'get' },
+    ORDERS_ADDEDIT: { endpoint: 'products/addedit', method: 'post' },
+
     AUTH_REGISTER: { endpoint: 'auth/register', method: 'post' },
     AUTH_LOGIN: { endpoint: 'auth/login', method: 'post' },
     VERIFY_OTP: { endpoint: 'auth/verifyotp', method: 'post' },
@@ -22,8 +25,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   
-  request(apiKey: string, payload?: any): Observable<any> {
-    console.log("payload", payload);
+  callapi(apiKey: string, payload?: any): Observable<any> {
+    // console.log("payload", payload);
     const api = this.APIS[apiKey];
     const url = `${this.apiUrl}/${api.endpoint}`;
 

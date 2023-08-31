@@ -14,8 +14,8 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { AuthGuard } from './services/auth/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { TokenInterceptor } from './services/auth/token.interceptor';
-
 import { ToastrModule } from 'ngx-toastr';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
     AuthModule,
     FormsModule,
     CommonModule,
+    NgxDatatableModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],

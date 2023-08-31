@@ -16,7 +16,7 @@ export class DashboardComponent {
     this.loadBlogList()
   }
   loadBlogList(): void {
-    this.apiService.request('BLOG_LIST').subscribe(
+    this.apiService.callapi('PRODUCTS_LIST').subscribe(
       (response: any) => {
         // Handle the response from the API
         console.log(response);

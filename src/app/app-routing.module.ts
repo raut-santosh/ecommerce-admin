@@ -19,6 +19,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'products',
+    loadChildren: () => import('./components/products/products.module').then(m => m.ProductsModule),
+  },
+  {
     path: 'templates',
     loadChildren: () => import('./template/template.module').then(m => m.TemplateModule),
     // Lazy loading of TemplateModule when accessing '/templates'
