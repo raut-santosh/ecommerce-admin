@@ -31,70 +31,70 @@ export class AuthService {
   }
 
 
-  login(params: any) {
-    return this.http
-      .post<any>(
-        this.apiUrl + '/' + this.apiService.APIS.AUTH_LOGIN.endpoint,
-        params
-      )
-      .pipe(
-        map((data) => {
-          if (data && data.token) {
-            this._syncUser({token: data.token});
-          }
-          return data;
-        })
-      );
-  }
+  // login(params: any) {
+  //   return this.http
+  //     .post<any>(
+  //       this.apiUrl + '/' + this.apiService.APILIST.AUTH_LOGIN.endpoint,
+  //       params
+  //     )
+  //     .pipe(
+  //       map((data) => {
+  //         if (data && data.token) {
+  //           this._syncUser({token: data.token});
+  //         }
+  //         return data;
+  //       })
+  //     );
+  // }
 
-  verifyOtp(params: any) {
-    return this.http
-      .post<any>(
-        this.apiUrl + '/' + this.apiService.APIS.VERIFY_OTP.endpoint,
-        params
-      )
-      .pipe(
-        map((data) => {
-          if (data && data.token) {
-            this._syncUser({token: data.token});
-          }
-          return data;
-        })
-      );
-  }
-  resendOtp(params: any) {
-    return this.http
-      .post<any>(
-        this.apiUrl + '/' + this.apiService.APIS.RESEND_OTP.endpoint,
-        params
-      )
-      .pipe(
-        map((data) => {
-          if (data && data.token) {
-            this._syncUser({token: data.token});
-          }
-          return data;
-        })
-      );
-  }
-  register(params: any) {
-    return this.http
-      .post<any>(
-        this.apiUrl + '/' + this.apiService.APIS.AUTH_REGISTER.endpoint,
-        params
-      )
-      .pipe(
-        map((data) => {
-          if (data && data.token) {
-            this._syncUser({token: data.token});
-            console.log(data);
-          }
-          return data;
-        })
-      );
-  }
+  // verifyOtp(params: any) {
+  //   return this.http
+  //     .post<any>(
+  //       this.apiUrl + '/' + this.apiService.APILIST.VERIFY_OTP.endpoint,
+  //       params
+  //     )
+  //     .pipe(
+  //       map((data) => {
+  //         if (data && data.token) {
+  //           this._syncUser({token: data.token});
+  //         }
+  //         return data;
+  //       })
+  //     );
+  // }
+  // resendOtp(params: any) {
+  //   return this.http
+  //     .post<any>(
+  //       this.apiUrl + '/' + this.apiService.APILIST.RESEND_OTP.endpoint,
+  //       params
+  //     )
+  //     .pipe(
+  //       map((data) => {
+  //         if (data && data.token) {
+  //           this._syncUser({token: data.token});
+  //         }
+  //         return data;
+  //       })
+  //     );
+  // }
+  // register(params: any) {
+  //   return this.http
+  //     .post<any>(
+  //       this.apiUrl + '/' + this.apiService.APILIST.AUTH_REGISTER.endpoint,
+  //       params
+  //     )
+  //     .pipe(
+  //       map((data) => {
+  //         if (data && data.token) {
+  //           this._syncUser({token: data.token});
+  //           console.log(data);
+  //         }
+  //         return data;
+  //       })
+  //     );
+  // }
 
-  refreshtoken(params = null) {
+  // refreshtoken(params = null) {
     // return this.http
     //   .post<any>(
     //     this.apiUrl + '/' + this.apiService.APIS.AUTH_REFRESHTOKEN.endpoint,
@@ -106,7 +106,7 @@ export class AuthService {
     //       return data;
     //     })
     //   );
-  }
+  // }
 
   logout() {
     // remove user from local storage to log user out

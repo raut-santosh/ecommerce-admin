@@ -5,11 +5,11 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/dashobard">Home</a></li>
-          <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">Blank</li>
+          <li class="breadcrumb-item">Products</li>
+          <!-- <li class="breadcrumb-item active">List</li> -->
         </ol>
       </nav>
-    </div><!-- End Page Title -->
+    </div>
   
     <section class="section">
       <div class="row">
@@ -17,13 +17,14 @@
   
           <div class="card">
             <ngx-datatable
-            class="bootstrap"
-            [columnMode]="'force'"
+              class="bootstrap"
+              [columnMode]="'force'"
               [externalPaging]="true"
               [count]="page.count"
               [offset]="page.offset"
               [limit]="page.limit"
               [rows]="items"
+              (page)="pageCallback($event)"
               [scrollbarH]="true"
               [headerHeight]="50"
               [footerHeight]="50"
@@ -35,6 +36,11 @@
                     <span>{{row?.idseq}}</span>
                 </ng-template>
             </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column name="image" >
+              <ng-template let-row="row"  ngx-datatable-cell-template>
+              </ng-template>
+            </ngx-datatable-column> -->
 
             <ngx-datatable-column name="Name" >
                 <ng-template let-row="row"  ngx-datatable-cell-template>
@@ -50,7 +56,9 @@
 
             <ngx-datatable-column name="Tags" >
                 <ng-template let-row="row"  ngx-datatable-cell-template>
-                    <span>{{row?.tags}}</span>
+                  <div class="tags">
+                    <span *ngFor="let tag of row.tags" class="badge bg-primary">{{tag}}</span>
+                  </div>
                 </ng-template>
             </ngx-datatable-column>
 
@@ -59,8 +67,12 @@
                     <span>{{row?.stock}}</span>
                 </ng-template>
             </ngx-datatable-column>
+            <ngx-datatable-column name="Actions" >
+              <ng-template let-row="row"  ngx-datatable-cell-template>
+                <button routerLink="/products/addedit"><i class="bi bi-pencil-square"></i></button>
+              </ng-template>
+          </ngx-datatable-column>
 
-          
             </ngx-datatable>
           </div>
   

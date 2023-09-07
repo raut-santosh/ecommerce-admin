@@ -16,17 +16,17 @@ export class LoginComponent {
   }
 
   login(){
-    this.authService.login(this.model).subscribe(
-      (response:any) => {
-        console.log(response);
-        this.router.navigate(['/dashboard']);
-        this.helperService.presentToast('success', 'Login Success')
-      },
-      (error:any) => {
-        console.log(error);
-        this.helperService.presentToast('error',error.error.error.msg);
-      }
-    )
+    // this.authService.login(this.model).subscribe(
+    //   (response:any) => {
+    //     console.log(response);
+    //     this.router.navigate(['/dashboard']);
+    //     this.helperService.presentToast('success', 'Login Success')
+    //   },
+    //   (error:any) => {
+    //     console.log(error);
+    //     this.helperService.presentToast('error',error.error.error.msg);
+    //   }
+    // )
   }
 
 }

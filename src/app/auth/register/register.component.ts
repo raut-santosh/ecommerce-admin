@@ -85,18 +85,18 @@ export class RegisterComponent {
     )
   }
   resendOtp(){
-    this.isResendDisabled = true; // Disable the resend button
-    this.authService.resendOtp(this.model).subscribe(
-      (response:any) => {
-        this.startTimer();
-        console.log(response);
-        this.helperService.presentToast('info','Resending OTP')
-      },
-      (error:any) => {
-        console.log(error);
-        this.helperService.presentToast('error',error.error.error.msg)
-      }
-    )
+  //   this.isResendDisabled = true; // Disable the resend button
+  //   this.authService.resendOtp(this.model).subscribe(
+  //     (response:any) => {
+  //       this.startTimer();
+  //       console.log(response);
+  //       this.helperService.presentToast('info','Resending OTP')
+  //     },
+  //     (error:any) => {
+  //       console.log(error);
+  //       this.helperService.presentToast('error',error.error.error.msg)
+  //     }
+  //   )
   }
 
 }
