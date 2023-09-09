@@ -17,6 +17,7 @@ export class ApiService {
     ORDERS_LIST: { endpoint: 'orders/list', method: 'get' }, // Change the endpoint to 'orders/list'
     ORDERS_ADDEDIT: { endpoint: 'orders/addedit', method: 'post' }, // Change the endpoint to 'orders/addedit'
     ROLES_LIST: { endpoint: 'roles/list', method: 'get' },
+    PERMISSIONS_LIST: { endpoint: 'permissions/list', method: 'get' },
     AUTH_REGISTER: { endpoint: 'auth/register', method: 'post' },
     AUTH_LOGIN: { endpoint: 'auth/login', method: 'post' },
     VERIFY_OTP: { endpoint: 'auth/verifyotp', method: 'post' },

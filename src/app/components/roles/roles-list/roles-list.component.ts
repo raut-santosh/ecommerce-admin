@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RolesAddeditComponent } from '../roles-addedit/roles-addedit.component';
 
 @Component({
   selector: 'app-roles-list',
@@ -16,7 +18,7 @@ export class RolesListComponent {
 
   list: [] = [];
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private modalService: NgbModal) {
 
   }
 
@@ -43,6 +45,14 @@ export class RolesListComponent {
     );
   }
 
+  openModal() {
+    const modalRef = this.modalService.open(RolesAddeditComponent,{
+    size: 'lg',
+    centered: true,
+    keyboard: true,
+    backdrop: 'static'
+  });
+  }
 
   pageCallback(pageInfo:{
     count?: number;
