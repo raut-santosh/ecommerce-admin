@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../app/services/auth/auth.guard';
-import { AuthModule } from './auth/auth.module';
-import { DashboardModule } from './components/dashboard/dashboard.module';
-import { LayoutsModule } from './layouts/layouts.module';
-import { TemplateModule } from './template/template.module';
+
 
 const routes: Routes = [
   {
@@ -39,6 +36,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
     // Lazy loading of AuthModule when accessing '/auth'
   },
+  {
+    path: 'roles',
+    loadChildren: () => import('./components/roles/roles.module').then(m => m.RolesModule)
+  }
 ];
 
 @NgModule({
