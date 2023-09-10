@@ -39,6 +39,10 @@ const routes: Routes = [
   {
     path: 'roles',
     loadChildren: () => import('./components/roles/roles.module').then(m => m.RolesModule)
+  },
+  {
+    path: 'permissions',
+    loadChildren: () => import('./components/permissions/permissions.module').then(m => m.PermissionsModule)
   }
 ];
 

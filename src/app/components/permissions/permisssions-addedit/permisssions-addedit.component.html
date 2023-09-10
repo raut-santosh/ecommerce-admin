@@ -1,0 +1,27 @@
+<div class="container p-5">
+    <i class="bi bi-x-square" (click)="closeModal()"></i>
+    <form (ngSubmit)="formSubmit($event)">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" [(ngModel)]="model.name" name="name" class="form-control" id="name">
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        </div>
+        <div class="mb-3">
+            <label for="alias" class="form-label">Alias</label>
+            <input type="text" (input)="onInputChange($event)" [(ngModel)]="model.alias" name="alias" class="form-control" id="alias">
+        </div>
+        <div class="mb-3">
+            <label for="alias" class="form-label">Category</label>
+            <input type="text" [(ngModel)]="model.category" name="category" class="form-control" id="alias">
+        </div>
+        <div class="mb-3">
+            <label for="alias" class="form-label">Description</label>
+            <input type="text" [(ngModel)]="model.description" name="description" class="form-control" id="alias">
+        </div>
+
+        <div class="mb-3 form-buttons">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" (click)="closeModal()" class="btn btn-danger">Cancel</button>
+        </div>
+    </form>
+</div>
