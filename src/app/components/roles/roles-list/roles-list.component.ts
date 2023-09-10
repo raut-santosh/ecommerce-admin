@@ -16,7 +16,7 @@ export class RolesListComponent {
     limit: 10
   }
 
-  list: [] = [];
+  list: any = [];
 
   constructor(private apiService: ApiService, private modalService: NgbModal) {
 
@@ -45,13 +45,22 @@ export class RolesListComponent {
     );
   }
 
-  openModal() {
-    const modalRef = this.modalService.open(RolesAddeditComponent,{
-    size: 'lg',
-    centered: true,
-    keyboard: true,
-    backdrop: 'static'
-  });
+  openModal(itemseq: number) {
+    const data = {
+      id: this.list[itemseq]._id
+    };
+    
+    console.log(data);
+  
+    const modalRef = this.modalService.open(RolesAddeditComponent, {
+      size: 'lg',
+      centered: true,
+      keyboard: true,
+      backdrop: 'static'
+    });
+  
+    // Pass the data to the modal component
+    modalRef.componentInstance.inputData = data;
   }
 
   pageCallback(pageInfo:{
