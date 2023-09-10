@@ -19,7 +19,9 @@ export class RolesAddeditComponent {
 
   }
   ngOnInit() {
-    this.getRole();
+    if(this.inputData) {
+      this.getRole();
+    }
     this.getList();
   }
 
@@ -37,7 +39,7 @@ export class RolesAddeditComponent {
   }
 
   closeModal() {
-    this.ngbActiveModal.close();
+    this.ngbActiveModal.close({refresh: true});
   }
 
   getRole() {  
@@ -68,7 +70,27 @@ export class RolesAddeditComponent {
     }
   }
 
+  onInputChange(event: Event): void {
+    // Get the input field value
+    const value = (event.target as HTMLInputElement).value;
+
+    // Replace spaces with underscores and update the inputValue
+    this.model.alias = value.replace(/ /g, '_');
+  }
+
   formSubmit(event: any){
-    console.log(this.model)
+    this.apiService.callapi('ROLE_ADDEDIT', this.model, null, 'post').subscribe(
+      (response: any) => {
+        console.log(response);
+        this.closeModal();
+        // Optionally, you can update the model or currentRole with the response if needed.
+        // this.model = response.role;
+        // this.currentRole = response.role;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+    
   }
 }

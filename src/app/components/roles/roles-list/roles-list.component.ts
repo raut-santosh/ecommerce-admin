@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RolesAddeditComponent } from '../roles-addedit/roles-addedit.component';
+import Swal from 'sweetalert2';
+import { HelperService } from 'src/app/services/helper/helper.service';
 
 @Component({
   selector: 'app-roles-list',
@@ -18,12 +20,12 @@ export class RolesListComponent {
 
   list: any = [];
 
-  constructor(private apiService: ApiService, private modalService: NgbModal) {
+  constructor(private apiService: ApiService, private modalService: NgbModal, private helperService: HelperService) {
 
   }
 
   ngOnInit(){
-    this.getList()
+    this.getList();
   }
 
 
@@ -45,13 +47,7 @@ export class RolesListComponent {
     );
   }
 
-  openModal(itemseq: number) {
-    const data = {
-      id: this.list[itemseq]._id
-    };
-    
-    console.log(data);
-  
+  openModal(itemId?: string) {  
     const modalRef = this.modalService.open(RolesAddeditComponent, {
       size: 'lg',
       centered: true,
@@ -60,8 +56,20 @@ export class RolesListComponent {
     });
   
     // Pass the data to the modal component
-    modalRef.componentInstance.inputData = data;
+    if (itemId) {
+      const data = {
+        id: itemId
+      };
+      console.log(data);
+      modalRef.componentInstance.inputData = data;
+    }
+  
+    modalRef.result.then((result) => {
+      // Handle the result when the modal is closed
+      this.getList();
+    });
   }
+
 
   pageCallback(pageInfo:{
     count?: number;
@@ -71,5 +79,30 @@ export class RolesListComponent {
   }){
     this.page.offset = pageInfo.offset as number;
   }
+
+  confirmDelete(roleId: string | any){
+    Swal.fire({
+      title: 'Are you sure you want to delete?',
+      text: 'This action cannot be undone!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Handle the confirmed action
+        this.apiService.callapi('ROLE_DELETE', {}, roleId, 'delete').subscribe(
+          (response: any) => {
+            this.helperService.presentToast('success', 'Role deleted successfully');
+            this.getList();
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
+        // Swal.fire('Deleted!', 'Your data has been deleted.', 'success');
+      }
+    });
+  }
+  
 
 }

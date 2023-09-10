@@ -11,13 +11,15 @@ export class ApiService {
   apiUrl: string = environment.apiUrl;
 
   // Define your API routes here
-  APILIST: { [key: string]: { endpoint: string; method: 'get' | 'post' } } = {
+  APILIST: { [key: string]: { endpoint: string; method: 'get' | 'post' | 'put' | 'delete' } } = {
     PRODUCTS_LIST: { endpoint: 'products/list', method: 'get' },
     PRODUCTS_ADDEDIT: { endpoint: 'products/addedit', method: 'post' },
     ORDERS_LIST: { endpoint: 'orders/list', method: 'get' }, // Change the endpoint to 'orders/list'
     ORDERS_ADDEDIT: { endpoint: 'orders/addedit', method: 'post' }, // Change the endpoint to 'orders/addedit'
     ROLES_LIST: { endpoint: 'roles/list', method: 'get' },
     ROLE:{endpoint: 'role', method: 'get' },
+    ROLE_ADDEDIT: { endpoint: 'role/addedit', method: 'post' },
+    ROLE_DELETE: {endpoint: 'role', method: 'delete' },
     PERMISSIONS_LIST: { endpoint: 'permissions/list', method: 'get' },
     AUTH_REGISTER: { endpoint: 'auth/register', method: 'post' },
     AUTH_LOGIN: { endpoint: 'auth/login', method: 'post' },
@@ -27,26 +29,29 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  callapi(apiKey: string, params = {}, id = null): Observable<any> {
+  callapi(apiKey: string, params = {}, id = null, method = 'get'): Observable<any> {
     const api = this.APILIST[apiKey];
     const url = `${this.apiUrl}/${api.endpoint}`;
   
-    if (api.method === 'get') {
+    // Include id in the URL if provided
+    const apiUrl = id ? `${url}/${id}` : url;
+  
+    if (method === 'get') {
       // Append query parameters to the URL
       const queryParams = new HttpParams({ fromObject: params });
-  
-      // Include id in the URL if provided
-      if (id) {
-        return this.http.get(`${url}/${id}`, { params: queryParams });
-      } else {
-        return this.http.get(url, { params: queryParams });
-      }
-    } else if (api.method === 'post') {
-      return this.http.post(url, params);
+      return this.http.get(apiUrl, { params: queryParams });
+    } else if (method === 'post') {
+      return this.http.post(apiUrl, params);
+    } else if (method === 'put') {
+      return this.http.put(apiUrl, params);
+    } else if (method === 'delete') {
+      // Note: DELETE method typically doesn't have a request body, so we omit the 'params' argument
+      return this.http.delete(apiUrl);
     } else {
       throw new Error(`Invalid API method for ${apiKey}`);
     }
   }
+  
   
 
   public downloadFile(url: string): Observable<Blob> {

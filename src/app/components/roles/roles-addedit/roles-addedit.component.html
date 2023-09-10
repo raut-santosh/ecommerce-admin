@@ -8,7 +8,7 @@
         </div>
         <div class="mb-3">
             <label for="alias" class="form-label">Alias</label>
-            <input type="text" [(ngModel)]="model.alias" name="alias" class="form-control" id="alias">
+            <input type="text" (input)="onInputChange($event)" [(ngModel)]="model.alias" name="alias" class="form-control" id="alias">
         </div>
 
         <div class="row p-3">
