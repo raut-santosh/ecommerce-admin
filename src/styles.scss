@@ -1252,3 +1252,27 @@
     font-size: 13px;
     color: #012970;
   }
+
+
+
+.pagetitle nav{
+	display: flex;
+    justify-content: space-between;
+}
+
+.pagetitle nav button{
+    margin-inline-end: 30px;
+}
+
+.bi-x-square{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.form-buttons{
+  display: flex;
+  justify-content: space-between;
+}
