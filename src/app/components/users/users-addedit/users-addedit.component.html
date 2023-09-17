@@ -22,9 +22,9 @@
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <select [(ngModel)]="model.role" name="role" class="form-select" id="role">
-              <option *ngFor="let role of roles; let i=index;" value="role.id">{{role.name}}</option>
+              <option *ngFor="let role of roles; let i=index;" [value]="role._id">{{role.name}}</option>
             </select>
-          </div>
+        </div>
 
         <div class="mb-3 form-buttons">
             <button type="submit" class="btn btn-primary">Submit</button>
