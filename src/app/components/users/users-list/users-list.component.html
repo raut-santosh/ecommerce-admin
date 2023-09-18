@@ -8,7 +8,7 @@
                 <li class="breadcrumb-item">Users</li>
             </ol>
 
-            <ng-select class="filter-by-roles" placeholder="Filter By Roles" [items]="roles" bindLabel="name" bindValue="_id" [(ngModel)]="filterModel.searchbyrole" (change)="filter()">
+            <ng-select class="filter-by-roles" placeholder="Filter By Roles" [items]="roles" bindLabel="name" bindValue="_id" [(ngModel)]="filterModel.searchbyrole" (ngModelChange)="filter()">
             </ng-select>
 
             <button (click)="openModal()" class="btn btn-primary btn-sm">Create User &nbsp;<i
