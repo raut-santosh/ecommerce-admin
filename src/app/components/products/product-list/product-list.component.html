@@ -1,83 +1,85 @@
 <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Products</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/dashobard">Home</a></li>
-          <li class="breadcrumb-item">Products</li>
-          <!-- <li class="breadcrumb-item active">List</li> -->
-        </ol>
-      </nav>
-    </div>
-  
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-  
-          <div class="card">
-            <ngx-datatable
-              class="bootstrap"
-              [columnMode]="'force'"
-              [externalPaging]="true"
-              [count]="page.count"
-              [offset]="page.offset"
-              [limit]="page.limit"
-              [rows]="items"
-              (page)="pageCallback($event)"
-              [scrollbarH]="true"
-              [headerHeight]="50"
-              [footerHeight]="50"
-              [rowHeight]="'auto'"
-            >
-          
-            <ngx-datatable-column name="Idseq" >
-                <ng-template let-row="row"  ngx-datatable-cell-template>
-                    <span>{{row?.idseq}}</span>
-                </ng-template>
-            </ngx-datatable-column>
+  <div class="pagetitle">
+    <h1>Products</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/dashobard">Home</a></li>
+        <li class="breadcrumb-item">Products</li>
+      </ol>
+      <button (click)="openModal()" class="btn btn-primary btn-sm">Add Product &nbsp;<i
+          class="bi bi-pencil-square"></i></button>
 
-            <!-- <ngx-datatable-column name="image" >
-              <ng-template let-row="row"  ngx-datatable-cell-template>
+    </nav>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <ngx-datatable class="bootstrap" [columnMode]="'force'" [externalPaging]="true" [count]="page.count"
+            [offset]="page.offset" [limit]="page.limit" [rows]="list" (page)="pageCallback($event)" [scrollbarH]="true"
+            [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
+
+            <ngx-datatable-column name="Idseq">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span>{{row?.idseq}}</span>
               </ng-template>
-            </ngx-datatable-column> -->
-
-            <ngx-datatable-column name="Name" >
-                <ng-template let-row="row"  ngx-datatable-cell-template>
-                    <span>{{row?.name}}</span>
-                </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column name="Price" >
-                <ng-template let-row="row"  ngx-datatable-cell-template>
-                    <span>{{row?.price}}</span>
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Tags" >
-                <ng-template let-row="row"  ngx-datatable-cell-template>
-                  <div class="tags">
-                    <span *ngFor="let tag of row.tags" class="badge bg-primary">{{tag}}</span>
-                  </div>
-                </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Stock" >
-                <ng-template let-row="row"  ngx-datatable-cell-template>
-                    <span>{{row?.stock}}</span>
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Actions" >
-              <ng-template let-row="row"  ngx-datatable-cell-template>
-                <button routerLink="/products/addedit"><i class="bi bi-pencil-square"></i></button>
+            <ngx-datatable-column name="Name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span>{{row?.name}}</span>
               </ng-template>
-          </ngx-datatable-column>
+            </ngx-datatable-column>
 
-            </ngx-datatable>
-          </div>
-  
+            <ngx-datatable-column name="Category">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span>{{row?.category}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Price">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span>&#8377;&nbsp;{{row?.price}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Stock">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span>{{row?.stock}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Tags">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span class="badge bg-primary" *ngFor="let tag of row.tags;">
+                  {{ tag }}
+                </span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="CreatedAt">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span>{{row?.createdAt | date:'dd-MM-yyyy'}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Actions">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <button (click)="openModal(row._id)" class="btn btn-primary btn-sm"><i
+                    class="bi bi-pencil-square"></i></button> &nbsp;&nbsp;
+                <button (click)="confirmDelete(row._id)" class="btn btn-danger btn-sm"><i
+                    class="bi bi-trash"></i></button>
+              </ng-template>
+            </ngx-datatable-column>
+
+          </ngx-datatable>
         </div>
+
       </div>
-    </section>
-  
-  </main>
+    </div>
+  </section>
+
+</main>

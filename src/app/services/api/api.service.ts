@@ -13,7 +13,9 @@ export class ApiService {
   // Define your API routes here
   APILIST: { [key: string]: { endpoint: string; method: 'get' | 'post' | 'put' | 'delete' } } = {
     PRODUCTS_LIST: { endpoint: 'products/list', method: 'get' },
-    PRODUCTS_ADDEDIT: { endpoint: 'products/addedit', method: 'post' },
+    PRODUCT_ADDEDIT: { endpoint: 'products/addedit', method: 'post' },
+    PRODUCT_DELETE: { endpoint: 'product', method: 'delete' },
+    PRODUCT: { endpoint: 'product', method: 'get' },
     ORDERS_LIST: { endpoint: 'orders/list', method: 'get' }, // Change the endpoint to 'orders/list'
     ORDERS_ADDEDIT: { endpoint: 'orders/addedit', method: 'post' }, // Change the endpoint to 'orders/addedit'
     ROLES_LIST: { endpoint: 'roles/list', method: 'get' },
@@ -28,10 +30,10 @@ export class ApiService {
     USER_DELETE: { endpoint: 'user', method: 'delete' },
     USER_ADDEDIT: { endpoint: 'user/addedit', method: 'post' },
     USER: { endpoint: 'user', method: 'get' },
-    AUTH_REGISTER: { endpoint: 'auth/register', method: 'post' },
-    AUTH_LOGIN: { endpoint: 'auth/login', method: 'post' },
-    VERIFY_OTP: { endpoint: 'auth/verifyotp', method: 'post' },
-    RESEND_OTP: { endpoint: 'auth/resendotp', method: 'post' },
+    // AUTH_REGISTER: { endpoint: 'auth/register', method: 'post' },
+    // AUTH_LOGIN: { endpoint: 'auth/login', method: 'post' },
+    // VERIFY_OTP: { endpoint: 'auth/verifyotp', method: 'post' },
+    // RESEND_OTP: { endpoint: 'auth/resendotp', method: 'post' },
   };
 
   constructor(private http: HttpClient) {}
