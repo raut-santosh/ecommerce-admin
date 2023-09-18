@@ -26,6 +26,7 @@
     "@iconify/icons-mdi": "^1.2.44",
     "@iconify/icons-ri": "^1.2.7",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
+    "@ng-select/ng-select": "^10.0.4",
     "@popperjs/core": "^2.11.7",
     "@swimlane/ngx-datatable": "^20.0.0",
     "angular-file-uploader": "^7.1.1",

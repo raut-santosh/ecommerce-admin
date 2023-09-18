@@ -5,7 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersAddeditComponent } from './users-addedit/users-addedit.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { FormsModule } from '@angular/forms';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [
     UsersAddeditComponent,
@@ -15,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     UsersRoutingModule,
     NgxDatatableModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule,
   ]
 })
 export class UsersModule { }

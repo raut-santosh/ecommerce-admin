@@ -19,6 +19,9 @@ export class UsersListComponent {
   }
 
   list: any = [];
+  filterModel: any = {};
+  roles: any;
+
 
   constructor(private apiService: ApiService, private modalService: NgbModal, private helperService: HelperService) {
 
@@ -26,19 +29,34 @@ export class UsersListComponent {
 
   ngOnInit(){
     this.getList();
+    this.getRoles();
   }
 
 
   getList(i_scroll = false) {
     i_scroll ? this.page.page++ : (this.page.page = this.page.page);
     i_scroll ? this.page.offset++ : (this.page.offset = this.page.offset);
-    let params = {...this.page}; 
+    let params = {...this.page, ...this.filterModel}; 
+    console.log(params);
     
     // Make the API call with the updated parameters
     this.apiService.callapi('USERS_LIST', params).subscribe(
       (response: any) => {
         console.log(response)
         this.list = response.list;
+        this.page.count = response.totalCount;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getRoles(){
+    this.apiService.callapi('ROLES_LIST').subscribe(
+      (response: any) => {
+        console.log(response)
+        this.roles = response.list;
         this.page.count = response.totalCount;
       },
       (error: any) => {
@@ -68,6 +86,12 @@ export class UsersListComponent {
       // Handle the result when the modal is closed
       this.getList();
     });
+  }
+
+  filter(){
+    this.page.page=1;
+    this.page.offset=0;
+    this.getList();
   }
 
 

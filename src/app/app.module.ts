@@ -16,7 +16,7 @@ import { AuthService } from './services/auth/auth.service';
 import { TokenInterceptor } from './services/auth/token.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +33,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CommonModule,
     NgxDatatableModule,
     BrowserAnimationsModule, // required animations module
+    NgSelectModule,
     ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [
