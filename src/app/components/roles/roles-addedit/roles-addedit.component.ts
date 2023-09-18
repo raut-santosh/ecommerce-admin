@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HelperService } from 'src/app/services/helper/helper.service';
 @Component({
   selector: 'app-roles-addedit',
   templateUrl: './roles-addedit.component.html',
@@ -15,11 +16,11 @@ export class RolesAddeditComponent {
   };
   currentRole: any = {};
   inputData: any;
-  constructor(private ngbActiveModal: NgbActiveModal, private apiService: ApiService) {
+  constructor(private ngbActiveModal: NgbActiveModal, private apiService: ApiService, private helperService: HelperService) {
 
   }
   ngOnInit() {
-    if(this.inputData) {
+    if (this.inputData) {
       this.getRole();
     }
     this.getList();
@@ -39,10 +40,10 @@ export class RolesAddeditComponent {
   }
 
   closeModal() {
-    this.ngbActiveModal.close({refresh: true});
+    this.ngbActiveModal.close({ refresh: true });
   }
 
-  getRole() {  
+  getRole() {
     // Make the API call with the roleId parameter
     this.apiService.callapi('ROLE', {}, this.inputData.id).subscribe(
       (response: any) => {
@@ -63,7 +64,7 @@ export class RolesAddeditComponent {
   togglePermission(permissionId: string): void {
     if (this.model.permissions.includes(permissionId)) {
       // Permission is already selected, so remove it
-      this.model.permissions = this.model.permissions.filter((item:any) => item !== permissionId);
+      this.model.permissions = this.model.permissions.filter((item: any) => item !== permissionId);
     } else {
       // Permission is not selected, so add it
       this.model.permissions.push(permissionId);
@@ -78,11 +79,12 @@ export class RolesAddeditComponent {
     this.model.alias = value.replace(/ /g, '_');
   }
 
-  formSubmit(event: any){
+  formSubmit(event: any) {
     this.apiService.callapi('ROLE_ADDEDIT', this.model, null, 'post').subscribe(
       (response: any) => {
         console.log(response);
         this.closeModal();
+        this.model._id ? this.helperService.presentToast('success', 'Successfully Updated Role') : this.helperService.presentToast('success', 'Successfully Added Role');
         // Optionally, you can update the model or currentRole with the response if needed.
         // this.model = response.role;
         // this.currentRole = response.role;
@@ -91,6 +93,6 @@ export class RolesAddeditComponent {
         console.error(error);
       }
     );
-    
+
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { HelperService } from 'src/app/services/helper/helper.service';
 @Component({
   selector: 'app-users-addedit',
   templateUrl: './users-addedit.component.html',
@@ -12,7 +12,7 @@ export class UsersAddeditComponent {
   inputData: any;
   roles: any = [];
   selectedRole: any = {};
-  constructor(private ngbActiveModal: NgbActiveModal, private apiService: ApiService) {
+  constructor(private ngbActiveModal: NgbActiveModal, private apiService: ApiService, private helperService: HelperService) {
 
   }
   ngOnInit() {
@@ -60,6 +60,11 @@ export class UsersAddeditComponent {
     this.apiService.callapi('USER_ADDEDIT', this.model, null, 'post').subscribe(
       (response: any) => {
         console.log(response);
+        if(this.model._id){
+          this.helperService.presentToast('success', 'User Updated successfully');
+        }else{
+          this.helperService.presentToast('success', 'User added successfully');
+        }
         this.closeModal();
       },
       (error: any) => {
