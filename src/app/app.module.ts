@@ -22,7 +22,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

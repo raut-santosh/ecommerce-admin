@@ -66,4 +66,24 @@ export class ApiService {
   public downloadFile(url: string): Observable<Blob> {
     return this.http.get(url, { responseType: 'blob' });
   }
+
+  file_upload(file:any) {
+    console.warn('sam', file);
+    let uploadUrl = environment.apiUrl + '/upload/file';
+    
+    let formData: FormData = new FormData();
+    formData.append("file", file, file.name);
+
+    return this.http
+      .post<any>(uploadUrl, formData, {
+        reportProgress: true,
+        observe: "events",
+      })
+      .pipe(
+        map((res) => {
+          console.log("file result", res);
+          return res;
+        })
+      );
+  }
 }

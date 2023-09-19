@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services/helper/helper.service';
+import { environment } from 'src/app/environments/environment';
 @Component({
   selector: 'app-product-addedit',
   templateUrl: './product-addedit.component.html',
@@ -13,6 +14,8 @@ export class ProductAddeditComponent {
   inputData: any;
   tags: string[] = [];
   newTag: string = '';
+  images: any = [];
+  apiUrl= environment.apiUrl;
 
   constructor(private ngbActiveModal: NgbActiveModal, private apiService: ApiService, private helperService: HelperService) {
 
@@ -48,6 +51,7 @@ export class ProductAddeditComponent {
         console.log(response);
         this.model = response.product;
         this.tags = this.model.tags;
+        this.images = this.model.images;
       },
       (error: any) => {
         console.error(error);
@@ -71,6 +75,7 @@ export class ProductAddeditComponent {
 
   formSubmit(event: any) {
     this.model.tags = this.tags;
+    this.model.images = this.images;
     this.apiService.callapi('PRODUCT_ADDEDIT', this.model, null, 'post').subscribe(
       (response: any) => {
         console.log(response);

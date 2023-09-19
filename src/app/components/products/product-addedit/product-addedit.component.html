@@ -5,6 +5,16 @@
     <div class="row">
       <div class="col-6">
         <div class="mb-3">
+          <ng-container *ngFor="let image of images">
+            <img style="width:95%;" src="{{apiUrl + '/' + image.path}}" alt="">
+          </ng-container>
+          <ng-container *ngIf="images.length == 0">
+            <app-fileupload [data]="{extentions: 'xlsx'}" (output)="images.push($event.file);"></app-fileupload>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" [(ngModel)]="model.name" name="name" class="form-control" id="name">
           <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
@@ -13,8 +23,6 @@
           <label for="category" class="form-label">Category</label>
           <input type="text" [(ngModel)]="model.category" name="category" class="form-control" id="category">
         </div>
-      </div>
-      <div class="col-6">
         <div class="mb-3">
           <label for="price" class="form-label">Price</label>
           <input type="text" [(ngModel)]="model.price" name="price" class="form-control" id="price">
