@@ -18,10 +18,13 @@ export class FileuploadComponent {
     if (event.target.files && event.target.files.length > 0) {
       // Get the selected file
       const file = event.target.files[0];
+      
 
       // Create a FormData object to send the file to the API
       const formData = new FormData();
       formData.append('file', file);
+      this.data.profile ? formData.append('alias','profile') : formData.append('alias','other');
+      console.log(file)
 
       // Replace 'yourApiEndpoint' with the actual API endpoint where you want to upload the file
       let uploadUrl = environment.apiUrl + '/upload/file';

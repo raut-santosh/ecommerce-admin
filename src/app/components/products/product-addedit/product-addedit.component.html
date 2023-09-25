@@ -9,7 +9,7 @@
             <img style="width:95%;" src="{{apiUrl + '/' + image.path}}" alt="">
           </ng-container>
           <ng-container *ngIf="images.length == 0">
-            <app-fileupload [data]="{extentions: 'xlsx'}" (output)="images.push($event.file);"></app-fileupload>
+            <app-fileupload [data]="{extentions: 'xlsx', profile:true}" (output)="images.push($event.file);"></app-fileupload>
           </ng-container>
         </div>
       </div>
