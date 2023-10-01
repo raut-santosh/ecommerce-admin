@@ -59,6 +59,10 @@ export class ProductAddeditComponent {
     );
   }
 
+  callImages(){
+    console.log(this.images);
+  }
+
   addTag(event:any) {
     if (!this.tags.includes(this.newTag)) {      
       this.tags.push(this.newTag);      

@@ -11,31 +11,35 @@ import { environment } from 'src/app/environments/environment';
 export class FileuploadComponent {
   @Input() data: any = {};
   @Output() output = new EventEmitter();
+  @Input() multiple: boolean = false;
 
   constructor(private apiService: ApiService, private http: HttpClient) { }
 
-  uploadFile(event: any) {
+  uploadFiles(event: any) {
     if (event.target.files && event.target.files.length > 0) {
-      // Get the selected file
-      const file = event.target.files[0];
-      
-
-      // Create a FormData object to send the file to the API
+      // Get the selected files
+      const files: FileList = event.target.files;
       const formData = new FormData();
-      formData.append('file', file);
-      this.data.profile ? formData.append('alias','profile') : formData.append('alias','other');
-      console.log(file)
+      
+      // Loop through the selected files and append them to the FormData
+      for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+      }
 
-      // Replace 'yourApiEndpoint' with the actual API endpoint where you want to upload the file
-      let uploadUrl = environment.apiUrl + '/upload/file';
+      // Set the alias based on your logic (profile or other)
+      const alias = this.data.profile ? 'profile' : 'other';
+      formData.append('alias', alias);
 
-      // Send the file to the API using HttpClient
+      // Replace 'yourApiEndpoint' with the actual API endpoint where you want to upload the files
+      const uploadUrl = environment.apiUrl + '/upload/files';
+
+      // Send the files to the API using HttpClient
       this.http.post(uploadUrl, formData)
         .subscribe(
           (response: any) => {
             // Handle the API response here, e.g., emit an event to notify the parent component
             console.log(response);
-            this.output.emit({file: response.file});
+            this.output.emit({ files: response.files });
           },
           (error) => {
             // Handle API error here, e.g., emit an event with an error message
@@ -44,4 +48,5 @@ export class FileuploadComponent {
         );
     }
   }
+
 }

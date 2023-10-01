@@ -6,11 +6,12 @@
       <div class="col-6">
         <div class="mb-3">
           <ng-container *ngFor="let image of images">
-            <img style="width:95%;" src="{{apiUrl + '/' + image.path}}" alt="">
+            <img class="mb-2" width="95%" src="{{apiUrl + '/' + image.path}}" alt="">
           </ng-container>
           <ng-container *ngIf="images.length == 0">
-            <app-fileupload [data]="{extentions: 'xlsx', profile:true}" (output)="images.push($event.file);"></app-fileupload>
+            <app-fileupload [data]="{extentions: 'xlsx', profile:true}" [multiple]="false" (output)="images=$event.files;"></app-fileupload>
           </ng-container>
+          <button type="button" (click)="callImages()">Click</button>
         </div>
       </div>
       <div class="col-6">
