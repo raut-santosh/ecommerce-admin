@@ -16,6 +16,7 @@ export class ProductAddeditComponent {
   newTag: string = '';
   images: any = [];
   apiUrl= environment.apiUrl;
+  checkedProfile: boolean = true;
 
   constructor(private ngbActiveModal: NgbActiveModal, private apiService: ApiService, private helperService: HelperService) {
 
@@ -23,6 +24,7 @@ export class ProductAddeditComponent {
   ngOnInit() {
     if (this.inputData) {
       this.getProduct();
+      this.checkProfile();
     }
     this.getList();
   }
@@ -59,10 +61,6 @@ export class ProductAddeditComponent {
     );
   }
 
-  callImages(){
-    console.log(this.images);
-  }
-
   addTag(event:any) {
     if (!this.tags.includes(this.newTag)) {      
       this.tags.push(this.newTag);      
@@ -95,5 +93,24 @@ export class ProductAddeditComponent {
       }
     );
 
+  }
+
+  updateImages($event: any) {
+  if (this.images.length > 0) {
+    // If there are existing images, append the new files
+  } else {
+    // If there are no existing images, simply assign the new files
+    // this.images = $event.files;
+  }
+  this.images.push(...$event.files);
+  console.log(this.images);
+  }
+
+  checkProfile(){
+    this.checkProfile = this.images.find((img: any) => img.alias === 'profile');
+  }
+
+  deleteImage(index:number){
+    this.images[index] = undefined;
   }
 }

@@ -3,18 +3,19 @@
   
   <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="formSubmit($event)">
     <div class="row">
-      <div class="col-6">
-        <div class="mb-3">
-          <ng-container *ngFor="let image of images">
-            <img class="mb-2" width="95%" src="{{apiUrl + '/' + image.path}}" alt="">
+      <div class="col-sm-12 col-md-6">
+        <div class="mb-3 profile-image" style="position:relative;">
+          <ng-container *ngFor="let image of images; let i=index;">
+            <img *ngIf="image?.alias=='profile'" class="mb-2" width="95%"  src="{{apiUrl + '/' + image?.path}}" alt="">
+            <i (click)="deleteImage(i)" class="bi bi-x-circle-fill" style="position: absolute; top: 5px; right: 20px;cursor:pointer;color:black;font-weight:bold;"></i>
+            <span *ngIf="image?.alias=='profile'">{{image?.name}}</span>
           </ng-container>
-          <ng-container *ngIf="images.length == 0">
-            <app-fileupload [data]="{extentions: 'xlsx', profile:true}" [multiple]="false" (output)="images=$event.files;"></app-fileupload>
+          <ng-container *ngIf="checkedProfile">
+            <app-fileupload [data]="{extentions: 'xlsx', profile:true}" [multiple]="false" (output)="updateImages($event)"></app-fileupload>
           </ng-container>
-          <button type="button" (click)="callImages()">Click</button>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-sm-12 col-md-6">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" [(ngModel)]="model.name" name="name" class="form-control" id="name">
@@ -52,6 +53,24 @@
       <label for="description" class="form-label">Description</label>
       <textarea type="text" [(ngModel)]="model.description" name="description" class="form-control" id="description">
       </textarea>
+    </div>
+
+    <div class="mb-3">
+      <!-- <ng-container *ngFor="let image of images">
+        <img class="mb-2" width="95%" src="{{apiUrl + '/' + image.path}}" alt="">
+      </ng-container> -->
+      <ng-container>
+        <app-fileupload [data]="{extentions: 'xlsx', profile:false}" [multiple]="true" (output)="updateImages($event)"></app-fileupload>
+      </ng-container>
+      <div class="row">
+        <ng-container *ngFor="let image of images">
+          <div class="col-md-6 col-sm-12 mb-3 mt-3" *ngIf="image.alias == 'other'" style="position: relative;">
+            <img class="product-images" width="100%" src="{{apiUrl + '/' + image.path}}" alt="">
+            <i class="bi bi-x-circle-fill" style="position: absolute; top: 5px; right: 20px;cursor:pointer;color:black;font-weight:bold;"></i>
+          </div>
+        </ng-container>
+      </div>
+      
     </div>
 
     <div class="mb-3 form-buttons">
