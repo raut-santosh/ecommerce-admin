@@ -28,8 +28,8 @@ export class UsersListComponent {
   }
 
   ngOnInit(){
-    this.getList();
     this.getRoles();
+    this.getList();
   }
 
 

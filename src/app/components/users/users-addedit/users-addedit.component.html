@@ -26,6 +26,60 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <h4>Address:</h4>
+        </div>
+
+        <ng-container *ngFor="let address of addresses; let i=index;">
+            <div class="mb-3">
+                <label for="deliverto" class="form-label">Deliver To <span class="required">*</span></label>
+                <input required type="text" [(ngModel)]="address.deliverTo" name="deliverTo" class="form-control" id="deliverto">
+            </div>
+            <div class="mb-3">
+                <label for="contactNo" class="form-label">Contact No <span class="required">*</span></label>
+                <input required type="text" [(ngModel)]="address.contactNo" name="contactNo" class="form-control" id="contactNo">
+            </div>
+            <div class="mb-3">
+                <label for="line1" class="form-label">Address Line 1 <span class="required">*</span></label>
+                <input required type="text" [(ngModel)]="address.line1" name="line1" class="form-control" id="line1">
+            </div>
+            <div class="mb-3">
+                <label for="line2" class="form-label">Address Line 2</label>
+                <input type="text" [(ngModel)]="address.line2" name="line2" class="form-control" id="line2">
+            </div>
+            <div class="mb-3">
+                <label for="locality" class="form-label">Locality <span class="required">*</span></label>
+                <input required type="text" [(ngModel)]="address.locality" name="locality" class="form-control" id="locality">
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City <span class="required">*</span></label>
+                <input required type="text" [(ngModel)]="address.city" name="city" class="form-control" id="city">
+            </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State <span class="required">*</span></label>
+                <input required type="text" [(ngModel)]="address.state" name="state" class="form-control" id="state">
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input  type="text" [(ngModel)]="address.country" name="country" class="form-control" id="country">
+            </div>
+            <div class="mb-3">
+                <label for="pincode" class="form-label">Pincode <span class="required">*</span></label>
+                <input required type="text" [(ngModel)]="address.pincode" name="pincode" class="form-control" id="pincode">
+            </div>
+            <div class="mb-3">
+                <label for="label" class="form-label">Label</label>
+                <input type="text" [(ngModel)]="address.label" name="label" class="form-control" id="label">
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" [(ngModel)]="address.isDefault" name="isDefault" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Default
+                </label>
+            </div>
+        </ng-container>
+        
+
         <div class="mb-3 form-buttons">
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="button" (click)="closeModal()" class="btn btn-danger">Cancel</button>

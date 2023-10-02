@@ -12,6 +12,7 @@ export class UsersAddeditComponent {
   inputData: any;
   roles: any = [];
   selectedRole: any = {};
+  addresses: any = [{}];
   constructor(private ngbActiveModal: NgbActiveModal, private apiService: ApiService, private helperService: HelperService) {
 
   }
@@ -47,6 +48,7 @@ export class UsersAddeditComponent {
         this.model = response.user;
         if(this.inputData){
           this.model.role = this.model.role._id;
+          this.model.addresses.length > 0 ? this.addresses = this.model.addresses: this.addresses = [{}];
         }
       },
       (error: any) => {
@@ -57,6 +59,7 @@ export class UsersAddeditComponent {
 
 
   formSubmit(event: any){
+    this.model.addresses = this.addresses;
     this.apiService.callapi('USER_ADDEDIT', this.model, null, 'post').subscribe(
       (response: any) => {
         console.log(response);
