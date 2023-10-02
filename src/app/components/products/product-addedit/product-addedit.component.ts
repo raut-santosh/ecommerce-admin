@@ -111,6 +111,6 @@ export class ProductAddeditComponent {
   }
 
   deleteImage(index:number){
-    this.images[index] = undefined;
+    this.images.splice(index, 1);
   }
 }

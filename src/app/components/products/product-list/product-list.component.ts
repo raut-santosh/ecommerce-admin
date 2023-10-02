@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { HelperService } from 'src/app/services/helper/helper.service';
 import { ProductAddeditComponent } from '../product-addedit/product-addedit.component';
-
+import { environment } from 'src/app/environments/environment';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -19,6 +19,7 @@ export class ProductListComponent {
   }
 
   list: any = [];
+  apiUrl: string = environment.apiUrl;
 
   constructor(private apiService: ApiService, private modalService: NgbModal, private helperService: HelperService) {
 
