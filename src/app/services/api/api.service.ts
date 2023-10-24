@@ -16,6 +16,7 @@ export class ApiService {
     PRODUCT_ADDEDIT: { endpoint: 'products/addedit', method: 'post' },
     PRODUCT_DELETE: { endpoint: 'product', method: 'delete' },
     PRODUCT: { endpoint: 'product', method: 'get' },
+    ORDER: { endpoint: 'orders', method: 'get' },
     ORDERS_LIST: { endpoint: 'orders/list', method: 'get' }, // Change the endpoint to 'orders/list'
     ORDERS_ADDEDIT: { endpoint: 'orders/addedit', method: 'post' }, // Change the endpoint to 'orders/addedit'
     ROLES_LIST: { endpoint: 'roles/list', method: 'get' },

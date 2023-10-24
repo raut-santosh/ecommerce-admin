@@ -22,7 +22,7 @@
             [offset]="page.offset" [limit]="page.limit" [rows]="list" (page)="pageCallback($event)" [scrollbarH]="true"
             [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
 
-            <ngx-datatable-column name="Idseq">
+            <ngx-datatable-column name="Idseq" [width]="50">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <span>{{row?.idseq}}</span>
               </ng-template>
@@ -31,7 +31,7 @@
             <ngx-datatable-column name="Image">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <ng-container *ngFor="let image of row.images; let i=index;">
-                  <img *ngIf="image.alias == 'profile'" style="width: 100px;height: 150px;object-fit: contain;" src="{{apiUrl + '/' + image.path}}" alt="">
+                  <img *ngIf="image.alias == 'profile'" style="width: 100px;object-fit: contain;" src="{{apiUrl + '/' + image.path}}" alt="">
                 </ng-container>
               </ng-template>
             </ngx-datatable-column>

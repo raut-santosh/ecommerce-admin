@@ -27,21 +27,40 @@
                             </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="Product Names">
+                        <ngx-datatable-column name="Total Quantity">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <span *ngFor="let product of row?.products; let i=index;">{{product.name}}</span>
+                                    <span>{{ row?.totalQuantity + ' Orders'}}</span>
                             </ng-template>
                         </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Product Names">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <ng-container *ngFor="let obj of row?.products; let i=index;">
+                                    <span>{{i+1 + ') ' +obj.product.name}} : <b>{{obj.product.price}} Rs</b></span> <br>
+                                </ng-container>
+                                <hr>
+                                <span><b>Total = {{row?.totalPrice}} Rs.</b></span>
+                            </ng-template>
+                        </ngx-datatable-column>
+
 
                         <ngx-datatable-column name="Address">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <span>{{row?.address}}</span>
-                            </ng-template>
+                                <span *ngIf="row?.address.customerName">{{ row?.address.customerName }},</span>
+                                <span *ngIf="row?.address.addressLine">{{ 'at. ' + row?.address.addressLine }},</span>
+                                <span *ngIf="row?.address.locality">{{ 'post. ' + row?.address.locality }},</span>
+                                <span *ngIf="row?.address.city">{{ 'tq. ' + row?.address.city }},</span>
+                                <span *ngIf="row?.address.state">{{ row?.address.state }} - {{ row?.address.postalCode }}</span><br>
+                                <span *ngIf="row?.address.country">{{ 'Country: ' + row?.address.country }}</span><br>
+                                <span *ngIf="row?.address.label">{{ 'Address Type: ' + row?.address.label }}</span><br>
+                                <span *ngIf="row?.address.contactNo">{{ 'Mo. No: ' + row?.address.contactNo }}</span><br>
+                            </ng-template>                            
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="CreatedAt">
+                        <ngx-datatable-column name="Dates">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <span>{{row?.createdAt  | date:'dd-MM-yyyy'}}</span>
+                                <b>Order created: <span class="badge bg-info">{{row?.createdAt  | date:'dd-MM-yyyy'}}</span></b>
+                                <b *ngIf="row?.deliveryDate">Order delivery: <span class="badge bg-info">{{row?.deliveryDate  | date:'dd-MM-yyyy'}}</span></b>
                             </ng-template>
                         </ngx-datatable-column>
 
